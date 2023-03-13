@@ -17,3 +17,16 @@ terraform {
 provider "aws" {
   region = "eu-central-1"
 }
+
+data "terraform_remote_state" "network" {
+  backend = "s3"
+  config = {
+    bucket = "org.exmaple.com.coding-exercise"
+    key    = "network"
+    region = "eu-central-1"
+  }
+}
+
+locals {
+  vpc_id = data.terraform_remote_state.network.outputs.exports.vpc_id
+}

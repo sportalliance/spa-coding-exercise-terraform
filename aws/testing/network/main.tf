@@ -20,6 +20,11 @@ provider "aws" {
 
 output "exports" {
   value = {
-    vpc_id = "arn:partition:service:region:account-id:resource-id"
+    vpc_id = "arn:partition:service:region:account-id:vpc-id"
+    privat_subnet_route_tables = toset([
+      "arn:partition:service:region:account-id:rt-1",
+      "arn:partition:service:region:account-id:rt-2",
+      "arn:partition:service:region:account-id:rt-3"
+    ])
   }
 }

@@ -1,7 +1,6 @@
 resource "aws_security_group" "worker_a_lb" {
   name = "worker-a-lb"
 
-  # Allow inbound HTTP requests
   ingress {
     from_port   = 80
     to_port     = 80
@@ -9,7 +8,6 @@ resource "aws_security_group" "worker_a_lb" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  # Allow all outbound requests
   egress {
     from_port   = 0
     to_port     = 0
@@ -53,7 +51,7 @@ resource "aws_lb_target_group" "worker_a" {
   name     = "worker-a"
   port     = 8080
   protocol = "HTTP"
-  vpc_id   = local.vpc_id
+  vpc_id   = local.network.vpc_id
 
   health_check {
     path                = "/"
@@ -69,6 +67,6 @@ resource "aws_lb_target_group" "worker_a" {
 resource "aws_lb" "worker_a" {
   name               = "worker-a"
   load_balancer_type = "application"
-  subnets            = data.aws_subnet_ids.main.ids
+  subnets            = local.network.private_subnets
   security_groups    = [aws_security_group.worker_a_lb]
 }

@@ -28,5 +28,9 @@ data "terraform_remote_state" "network" {
 }
 
 locals {
-  vpc_id = data.terraform_remote_state.network.outputs.exports.vpc_id
+  network = {
+    vpc_id                      = data.terraform_remote_state.network.outputs.exports.vpc_id
+    database_subnet_group_name  = data.terraform_remote_state.network.outputs.exports.database_subnet_group_name
+    private_subnets_cidr_blocks = data.terraform_remote_state.network.outputs.exports.private_subnets_cidr_blocks
+  }
 }

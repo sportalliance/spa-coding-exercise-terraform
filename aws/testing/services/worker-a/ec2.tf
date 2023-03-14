@@ -43,7 +43,7 @@ data "aws_subnet_ids" "main" {
 
 resource "aws_autoscaling_group" "worker_a" {
   launch_configuration = aws_launch_configuration.worker_a.name
-  vpc_zone_identifier  = data.aws_subnet_ids.main.ids
+  vpc_zone_identifier  = local.network.private_subnets
   target_group_arns    = [aws_lb_target_group.worker_a.arn]
   health_check_type    = "ELB"
 

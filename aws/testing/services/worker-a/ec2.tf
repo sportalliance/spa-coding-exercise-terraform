@@ -33,12 +33,15 @@ resource "aws_launch_configuration" "worker_a" {
   user_data = <<-EOF
               #!/bin/bash
               echo "Hello, World" > index.html
-              nohup busybox httpd -f -p ${var.server_port} &
+              nohup busybox httpd -f -p ${local.server_port} &
               EOF
 }
 
-data "aws_subnet_ids" "main" {
-  vpc_id = local.vpc_id
+data "aws_subnets" "main" {
+  filter {
+    name   = "vpc-id"
+    values = [local.network.vpc_id]
+  }
 }
 
 resource "aws_autoscaling_group" "worker_a" {

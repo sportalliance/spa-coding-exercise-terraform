@@ -15,7 +15,6 @@ resource "aws_db_instance" "testing" {
   engine_version       = "15.2"
   instance_class       = "db.t4g.micro"
   allocated_storage    = 50
-  name                 = "testing-db"
   username             = "admin"
   password             = "changeme"
   security_group_names = [aws_security_group.testing_db.name]

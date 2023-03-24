@@ -32,4 +32,6 @@ locals {
     vpc_id          = data.terraform_remote_state.network.outputs.exports.vpc_id
     private_subnets = data.terraform_remote_state.network.outputs.exports.private_subnets
   }
+
+  server_port = 8080
 }

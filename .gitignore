@@ -30,3 +30,5 @@ override.tf.json
 
 # only for this repo, you should always check-in lock files
 .terraform.lock.hcl
+
+.idea/

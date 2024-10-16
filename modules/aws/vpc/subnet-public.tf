@@ -3,7 +3,7 @@ resource "aws_subnet" "public_subnet" {
   cidr_block        = var.public_subnet_cidr_block
   availability_zone = var.availability_zone
 
-  tags = { Name       = "${var.resource_name}-public" }
+  tags = { Name = "${var.resource_name}-public" }
 }
 
 resource "aws_route_table_association" "public_route_table_association" {
